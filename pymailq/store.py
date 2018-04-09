@@ -339,11 +339,11 @@ class PostqueueStore(object):
             provided by :func:`re.compile` method to match postfix IDs.
             Recognized IDs are either:
                 - hexadecimals, 8 to 12 chars length (regular queue IDs)
-                - encoded in a 52-character alphabet, 11 to 16 chars length
+                - encoded in a 52-character alphabet, minimum 11 chars length
                   (long queue IDs)
             They can be followed with ``*`` or ``!``.
             Default used regular expression is:
-                ``r"^([A-F0-9]{8,12}|[B-Zb-z0-9]{11,16})[*!]?$"``.
+                ``r"^([A-F0-9]{8,12}|[B-Zb-z0-9]{11,})[*!]?$"``.
 
         .. attribute:: mail_addr_re
 
@@ -372,7 +372,7 @@ class PostqueueStore(object):
     postqueue_cmd = None
     spool_path = None
     postqueue_mailstatus = ['active', 'deferred', 'hold']
-    mail_id_re = re.compile(r"^([A-F0-9]{8,12}|[B-Zb-z0-9]{11,16})[*!]?$")
+    mail_id_re = re.compile(r"^([A-F0-9]{8,12}|[B-Zb-z0-9]{11,})[*!]?$")
     mail_addr_re = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+$")
     MailClass = Mail
 
